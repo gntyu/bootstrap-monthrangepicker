@@ -8,10 +8,10 @@
 
 ### 1 代表季度范围选择
 
-###季度范围选择截图
+### 季度范围选择截图
 ![Improvely.com](http://t.w2wz.cn/t6/700/1554970814x2099769202.png)
 
-###月份范围选择截图
+### 月份范围选择截图
 ![Improvely.com](http://t.w2wz.cn/t6/700/1554970876x1822611365.png)
 
 This date range picker component creates a dropdown menu from which a user can
