@@ -1,32 +1,30 @@
 {
-  "_from": "bootstrap-daterangepicker@^3.0.3",
-  "_id": "bootstrap-daterangepicker@3.0.3",
+  "_from": "bootstrap-monthrangepicker@^1.0.0",
+  "_id": "bootstrap-monthrangepicker@1.0.0",
   "_inBundle": false,
   "_integrity": "sha1-ZwxjjcEkoVqV3fBECvNNGs7nz/w=",
-  "_location": "/bootstrap-daterangepicker",
+  "_location": "/bootstrap-monthrangepicker",
   "_phantomChildren": {},
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "bootstrap-daterangepicker@^3.0.3",
-    "name": "bootstrap-daterangepicker",
-    "escapedName": "bootstrap-daterangepicker",
-    "rawSpec": "^3.0.3",
+    "raw": "bootstrap-monthrangepicker@^1.0.0",
+    "name": "bootstrap-monthrangepicker@^1.0.0",
+    "escapedName": "bootstrap-monthrangepicker",
+    "rawSpec": "^1.0.0",
     "saveSpec": null,
-    "fetchSpec": "^3.0.3"
+    "fetchSpec": "^1.0.0"
   },
   "_requiredBy": [
-    "/",
-    "/@bop/daterangepicker"
+    "/"
   ],
   "_resolved": "http://registry.npm.taobao.org/bootstrap-daterangepicker/download/bootstrap-daterangepicker-3.0.3.tgz",
   "_shasum": "670c638dc124a15a95ddf0440af34d1acee7cffc",
-  "_spec": "bootstrap-daterangepicker@^3.0.3",
+  "_spec": "bootstrap-monthrangepicker@^1.0.0",
   "_where": "/Users/luyan1/work/myWeb",
   "author": {
-    "name": "Dan Grossman",
-    "email": "dan@dangrossman.info",
-    "url": "http://www.dangrossman.info"
+    "name": "luyan",
+    "email": "786120679@qq.com"
   },
   "bugs": {
     "url": "https://github.com/dangrossman/daterangepicker/issues"
@@ -37,14 +35,14 @@
     "moment": "^2.9.0"
   },
   "deprecated": false,
-  "description": "Date range picker component for Bootstrap",
+  "description": "Month & Quater range picker component for Bootstrap",
   "devDependencies": {
     "node-sass": "^3.4.2"
   },
   "homepage": "https://github.com/dangrossman/daterangepicker",
   "license": "MIT",
   "main": "daterangepicker.js",
-  "name": "bootstrap-daterangepicker",
+  "name": "bootstrap-monthrangepicker",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dangrossman/daterangepicker.git"
@@ -54,5 +52,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "style": "daterangepicker.css",
-  "version": "3.0.3"
+  "version": "1.0.0"
 }
