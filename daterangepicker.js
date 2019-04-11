@@ -25,10 +25,10 @@
         module.exports = factory(moment, jQuery);
     } else {
         // Browser globals
-        root.daterangepicker = factory(root.moment, root.jQuery);
+        root.monthrangepicker = factory(root.moment, root.jQuery);
     }
 }(this, function(moment, $) {
-    var DateRangePicker = function(element, options, cb) {
+    var Monthrangepicker = function(element, options, cb) {
 
         //default settings for options
         this.parentEl = 'body';
@@ -454,9 +454,9 @@
 
     };
 
-    DateRangePicker.prototype = {
+    Monthrangepicker.prototype = {
 
-        constructor: DateRangePicker,
+        constructor: Monthrangepicker,
 
         setStartDate: function(startDate) {
             if (typeof startDate === 'string')
@@ -1233,17 +1233,17 @@
 
     };
 
-    $.fn.daterangepicker = function(options, callback) {
-        var implementOptions = $.extend(true, {}, $.fn.daterangepicker.defaultOptions, options);
+    $.fn.monthrangepicker = function(options, callback) {
+        var implementOptions = $.extend(true, {}, $.fn.monthrangepicker.defaultOptions, options);
         this.each(function() {
             var el = $(this);
             if (el.data('daterangepicker'))
                 el.data('daterangepicker').remove();
-            el.data('daterangepicker', new DateRangePicker(el, implementOptions, callback));
+            el.data('daterangepicker', new Monthrangepicker(el, implementOptions, callback));
         });
         return this;
     };
 
-    return DateRangePicker;
+    return Monthrangepicker;
 
 }));

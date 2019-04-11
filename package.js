@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'dangrossman:bootstrap-daterangepicker',
-  version: '3.0.3',
-  summary: 'Date range picker component',
-  git: 'https://github.com/dangrossman/daterangepicker',
+  name: 'gntyu/bootstrap-monthquarterrangepicker',
+  version: '1.1.0',
+  summary: 'Month & Quarter range picker component',
+  git: 'https://github.com/gntyu/bootstrap-monthquarterrangepicker',
   documentation: 'README.md'
 });
 

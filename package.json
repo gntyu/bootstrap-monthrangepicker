@@ -1,6 +1,6 @@
 {
-  "_from": "bootstrap-monthrangepicker@^1.0.0",
-  "_id": "bootstrap-monthrangepicker@1.0.0",
+  "_from": "bootstrap-monthrangepicker@^1.1.0",
+  "_id": "bootstrap-monthrangepicker@1.1.0",
   "_inBundle": false,
   "_integrity": "sha1-ZwxjjcEkoVqV3fBECvNNGs7nz/w=",
   "_location": "/bootstrap-monthrangepicker",
@@ -8,19 +8,19 @@
   "_requested": {
     "type": "range",
     "registry": true,
-    "raw": "bootstrap-monthrangepicker@^1.0.0",
-    "name": "bootstrap-monthrangepicker@^1.0.0",
+    "raw": "bootstrap-monthrangepicker@^1.1.0",
+    "name": "bootstrap-monthrangepicker@^1.1.0",
     "escapedName": "bootstrap-monthrangepicker",
-    "rawSpec": "^1.0.0",
+    "rawSpec": "^1.1.0",
     "saveSpec": null,
-    "fetchSpec": "^1.0.0"
+    "fetchSpec": "^1.1.0"
   },
   "_requiredBy": [
     "/"
   ],
   "_resolved": "http://registry.npm.taobao.org/bootstrap-daterangepicker/download/bootstrap-daterangepicker-3.0.3.tgz",
   "_shasum": "670c638dc124a15a95ddf0440af34d1acee7cffc",
-  "_spec": "bootstrap-monthrangepicker@^1.0.0",
+  "_spec": "bootstrap-monthrangepicker@^1.1.0",
   "_where": "/Users/luyan1/work/myWeb",
   "author": {
     "name": "luyan",
@@ -52,5 +52,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "style": "daterangepicker.css",
-  "version": "1.0.0"
+  "version": "1.1.0"
 }
