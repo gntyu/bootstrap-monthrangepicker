@@ -324,12 +324,12 @@
 
 /*add by luyan*/
 .daterangepicker .calendar-table td.monthPanel {
-  min-width: 50px;
-  width: 50px;
+  min-width: 60px;
+  width: 60px;
   height: 32px;
 }
 .daterangepicker select.yearselect.monthPanel {
-  width: 80%;
+  width: 100%;
 }
 .daterangepicker .calendar-table td.quarterPanel {
   min-width: 150px;
