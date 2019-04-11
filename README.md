@@ -1,4 +1,8 @@
-# Date Range Picker for Bootstrap
+# Month&Qauter Range Picker for Bootstrap
+和原版基本一致，去掉time和日期的选择，增加一个参数：
+monthOrQuarter  number
+0 代表月份范围选择（默认）
+1 代表季度范围选择
 
 ![Improvely.com](https://i.imgur.com/UTRlaar.png)
 
