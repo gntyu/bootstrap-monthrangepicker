@@ -2,15 +2,16 @@
 
 和原版基本一致，去掉time和日期的选择，增加一个参数：
 
-## monthOrQuarter  number
+### monthOrQuarter:number类型
 
 ### 0 代表月份范围选择（默认）
 
 ### 1 代表季度范围选择
 
+### 季度范围选择截图
 ![Improvely.com](http://t.w2wz.cn/t6/700/1554970814x2099769202.png)
 
-
+### 月份范围选择截图
 ![Improvely.com](http://t.w2wz.cn/t6/700/1554970876x1822611365.png)
 
 This date range picker component creates a dropdown menu from which a user can
