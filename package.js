@@ -1,6 +1,6 @@
 Package.describe({
   name: 'gntyu/bootstrap-monthquarterrangepicker',
-  version: '1.1.0',
+  version: '1.1.1',
   summary: 'Month & Quarter range picker component',
   git: 'https://github.com/gntyu/bootstrap-monthquarterrangepicker',
   documentation: 'README.md'
