@@ -1,6 +1,6 @@
 /**
-* @version: 3.0.3
-* @author: Dan Grossman http://www.dangrossman.info/
+* @version: 1.1.0
+* @author: Dan Grossman http://www.dangrossman.info/  --edit by luyan
 * @copyright: Copyright (c) 2012-2018 Dan Grossman. All rights reserved.
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
 * @website: http://www.daterangepicker.com/
@@ -28,7 +28,7 @@
         root.monthrangepicker = factory(root.moment, root.jQuery);
     }
 }(this, function(moment, $) {
-    var Monthrangepicker = function(element, options, cb) {
+    var MonthRangePicker = function(element, options, cb) {
 
         //default settings for options
         this.parentEl = 'body';
@@ -454,9 +454,9 @@
 
     };
 
-    Monthrangepicker.prototype = {
+    MonthRangePicker.prototype = {
 
-        constructor: Monthrangepicker,
+        constructor: MonthRangePicker,
 
         setStartDate: function(startDate) {
             if (typeof startDate === 'string')
@@ -1239,11 +1239,11 @@
             var el = $(this);
             if (el.data('daterangepicker'))
                 el.data('daterangepicker').remove();
-            el.data('daterangepicker', new Monthrangepicker(el, implementOptions, callback));
+            el.data('daterangepicker', new MonthRangePicker(el, implementOptions, callback));
         });
         return this;
     };
 
-    return Monthrangepicker;
+    return MonthRangePicker;
 
 }));
