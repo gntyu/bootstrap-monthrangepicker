@@ -1,4 +1,4 @@
-# Month&Quater Range Picker for Bootstrap
+# Month & Quater Range Picker for Bootstrap
 
 Edit from [bootstrap-daterangepicker](https://github.com/dangrossman/bootstrap-daterangepicker);
 
@@ -15,12 +15,12 @@ If your project is React ,you can see the [react-bootstrap-monthrangepicker](htt
 ```javascript
   monthOrQuarter:1
 ```
-![Improvely.com](http://t.w2wz.cn/t6/700/1554970814x2099769202.png)
+![Improvely.com](http://t.w2wz.cn/t6/700/1555042058x2099769202.png)
 
 ```javascript
   monthOrQuarter:0
 ```
-![Improvely.com](http://t.w2wz.cn/t6/700/1554970876x1822611365.png)
+![Improvely.com](http://t.w2wz.cn/t6/700/1555042082x2728278728.png)
 
 ## Links
 
