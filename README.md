@@ -20,7 +20,7 @@ If your project is React ,you can see the [react-bootstrap-monthrangepicker](htt
 ```javascript
   monthOrQuarter:0
 ```
-![Improvely.com](http://t.w2wz.cn/t6/700/1555049566x2099769202.gif)
+![Improvely.com](http://t.w2wz.cn/t6/700/1555049870x2728265518.gif)
 
 ## Links
 
