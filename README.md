@@ -15,12 +15,12 @@ If your project is React ,you can see the [react-bootstrap-monthrangepicker](htt
 ```javascript
   monthOrQuarter:1
 ```
-![Improvely.com](http://t.w2wz.cn/t6/700/1555049607x2728278608.gif)
+![image](https://github.com/gntyu/react-bootstrap-monthrangepicker/blob/master/quarter.gif)
 
 ```javascript
   monthOrQuarter:0
 ```
-![Improvely.com](http://t.w2wz.cn/t6/700/1555049870x2728265518.gif)
+![image](https://github.com/gntyu/react-bootstrap-monthrangepicker/blob/master/month.gif)
 
 ## Links
 
