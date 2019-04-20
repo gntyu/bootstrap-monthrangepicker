@@ -525,6 +525,16 @@
         isCustomDate: function() {
             return false;
         },
+        getYearRange:function(date,calendar){//add by luyan
+            var dateYear = date.year()
+            var calendarYear = calendar.year();
+            var times = calendarYear - dateYear;
+            if(times>=0){
+                return (calendarYear - (Math.ceil(times/12))*12)+''
+            }else{
+                return (calendarYear - (parseInt(times/12))*12)+''
+            } 
+        },
 
         updateView: function() {
             if (this.endDate)
@@ -535,24 +545,55 @@
         },
 
         updateMonthsInView: function() {
-            if (this.endDate) {
-                this.leftCalendar.month = this.startDate.clone();
-                if (!this.linkedCalendars && (this.endDate.year() != this.startDate.year())) {
-                    this.rightCalendar.month = this.endDate.clone();
-                } else {
-                    this.rightCalendar.month = this.startDate.clone().add(1, 'year');
+            if(this.monthOrQuarter==2){
+                var start = this.startDate.format('YYYY');
+                var start_range=this.startDate._i||start;
+                if(!this.startDate._i){
+                    start_range=this.getYearRange(this.startDate,moment())
                 }
+                if (this.endDate) {
+                    var end = this.endDate.format('YYYY');
+                    var end_range=this.endDate._i||end;
+                    if(!this.endDate._i){
+                        end_range=this.getYearRange(this.endDate,moment().add(12,'year'))
+                    }
+                    this.leftCalendar.month = moment(start_range);
+                    if (!this.linkedCalendars && (start_range!= end_range)) {
+                        this.rightCalendar.month =  moment(end_range);
+                    } else {
+                        this.rightCalendar.month = moment(start_range).add(12, 'year');
+                    }
+                }else{
+                    if (Number(this.leftCalendar.month.format('YYYY')) > start || Number(this.rightCalendar.month.format('YYYY')) +11 < start) {
+                        this.leftCalendar.month = moment(start_range);
+                        this.rightCalendar.month = moment(start_range).add(12, 'year');
+                    }
+                }
+                if (this.maxDate && this.linkedCalendars && this.rightCalendar.month.add(11,'year') > this.maxDate) {
+                    this.rightCalendar.month = this.maxDate.clone();
+                    this.leftCalendar.month = this.maxDate.clone().subtract(12, 'year');
+                } 
             }else{
-                if (this.leftCalendar.month.format('YYYY') != this.startDate.format('YYYY') && this.rightCalendar.month.format('YYYY') != this.startDate.format('YYYY')) {
+                if (this.endDate) {
                     this.leftCalendar.month = this.startDate.clone();
-                    this.rightCalendar.month = this.startDate.clone().add(1, 'year');
+                    if (!this.linkedCalendars && (this.endDate.year() != this.startDate.year())) {
+                        this.rightCalendar.month = this.endDate.clone();
+                    } else {
+                        this.rightCalendar.month = this.startDate.clone().add(1, 'year');
+                    }
+                }else{
+                    if (this.leftCalendar.month.format('YYYY') != this.startDate.format('YYYY') && this.rightCalendar.month.format('YYYY') != this.startDate.format('YYYY')) {
+                        this.leftCalendar.month = this.startDate.clone();
+                        this.rightCalendar.month = this.startDate.clone().add(1, 'year');
+                    }
                 }
+                if (this.maxDate && this.linkedCalendars && this.rightCalendar.month > this.maxDate) {
+                    this.rightCalendar.month = this.maxDate.clone();
+                    this.leftCalendar.month = this.maxDate.clone().subtract(1, 'year');
+                } 
             }
-            if (this.maxDate && this.linkedCalendars && this.rightCalendar.month > this.maxDate) {
-                this.rightCalendar.month = this.maxDate.clone();
-                this.leftCalendar.month = this.maxDate.clone().subtract(1, 'year');
-            } 
            
+               
         },
 
         updateCalendars: function() {
@@ -568,9 +609,9 @@
         //edit by luyan 
         renderCalendar: function(side) {
             var calendar = side == 'left' ? this.leftCalendar : this.rightCalendar;
-            var year = calendar.month.year();
-            var firstDay = moment([year,0]);
-            var lastDay = moment([year,11]);
+            var year = calendar.month.format('YYYY');
+            var firstDay = this.monthOrQuarter==2?year:moment([year,0]);
+            var lastDay = this.monthOrQuarter==2?moment(year).add(11,'year'):moment([year,11]);
 
             //initialize a 6 rows x 7 columns array for the calendar
             var calendar = [];
@@ -582,6 +623,17 @@
                     var arr =[];
                     arr.push(moment(year+'/'+(i*3+1)))
                     calendar[i] = arr;
+                }
+            }else if(this.monthOrQuarter==2){//年
+                var index =0;
+                for (var i = 0; i < 3; i++) {
+                    var arr =[];
+                    for (var j = 0; j < 4; j++){
+                        arr.push(moment(year).add(index,'year'));
+                        index++;
+                    }
+                    calendar[i] = arr;
+                   
                 }
             }else{//月份
                 for (var i = 0; i < 4; i++) {
@@ -614,88 +666,69 @@
             html += '<tr>';
 
             // prev arrow
-            if ((!minDate || minDate.isBefore(calendar.firstDay)) && (!this.linkedCalendars || side == 'left')) {
+            if( (Number(year) > this.minYear) && (!this.linkedCalendars || side == 'left')) {
                 html += '<th class="prev available"><span></span></th>';
             } else {
                 html += '<th></th>';
             }
 
-            var dateHtml = calendar[0][0].format("YYYY");
+            if(this.monthOrQuarter==2){
+                var dateHtml = calendar[0][0].format("YYYY")+'-'+ calendar[0][0].clone().add(11,'year').format("YYYY");
+            }else{
+                var dateHtml = calendar[0][0].format("YYYY");
+            }
+            
 
             if (this.showDropdowns) {
-                var currentMonth = calendar[0][0].year();
                 var currentYear = calendar[0][0].year();
-                var maxYear = this.maxYear || calendar[0][0].year(5);
-                var minYear = this.minYear || calendar[0][0].year(-20);
-                var inMinYear = currentYear == minYear;
-                var inMaxYear = currentYear == maxYear;
-
-                // var maxYear = (maxDate && maxDate.year()) || (this.maxYear);
-                // var minYear = (minDate && minDate.year()) || (this.minYear);
-                // var inMinYear = currentYear == minYear;
-                // var inMaxYear = currentYear == maxYear;
-
-                // var monthHtml = '<select class="monthselect">';
-                // for (var m = 0; m < 12; m++) {
-                //     if ((!inMinYear || m >= minDate.month()) && (!inMaxYear || m <= maxDate.month())) {
-                //         monthHtml += "<option value='" + m + "'" +
-                //             (m === currentMonth ? " selected='selected'" : "") +
-                //             ">" + this.locale.monthNames[m] + "</option>";
-                //     } else {
-                //         monthHtml += "<option value='" + m + "'" +
-                //             (m === currentMonth ? " selected='selected'" : "") +
-                //             " disabled='disabled'>" + this.locale.monthNames[m] + "</option>";
-                //     }
-                // }
-                // monthHtml += "</select>";
+                var maxYear = this.maxYear ;
+                var minYear = this.minYear ;
 
                 var yearHtml = '<select class="yearselect monthPanel">';
-                for (var y = minYear; y <= maxYear; y++) {
-                    yearHtml += '<option value="' + y + '"' 
-                    // if(side == 'left'){
-                    //     yearHtml += (y === currentYear-1 ? ' selected="selected"' : '') +'>' + y + '</option>';
-                    // }else{
+                if(this.monthOrQuarter==2){
+                    var arr =[];
+                    for(var y = Math.min(Number(year) ,maxYear) ; y + 12 >= minYear; y = Number(y) - 12){
+                        var end = Number(y) +11,temp ='';
+                        temp += '<option value="' + y + '"' 
+                        temp += ((year>=y&&year<=end) ? ' selected="selected"' : '') +'>' + y +'-' + end + '</option>'; 
+                        arr.unshift(temp);
+                    }
+                    for (var y = Math.max(Number(year) +12,minYear); y < maxYear; y = Number(y) + 12 ) {
+                        var end = Number(y) +11,temp ='';
+                        temp += '<option value="' + y + '"' 
+                        temp += ((year>=y&&year<=end) ? ' selected="selected"' : '') +'>' + y +'-' + end + '</option>';  
+                        arr.push(temp);
+                    }
+                    for(var i =0;i<arr.length;i++){
+                        yearHtml += arr[i];
+                    }
+                }else{
+                    for (var y = minYear; y <= maxYear; y++) {
+                        yearHtml += '<option value="' + y + '"' 
                         yearHtml += (y === currentYear ? ' selected="selected"' : '') +'>' + y + '</option>';
-                    // }    
+                    }
                 }
                 yearHtml += '</select>';
 
-                // dateHtml = monthHtml + yearHtml;
                 dateHtml = yearHtml;
             }
-
-            html += '<th class="month">' + dateHtml + '</th>';
+            
+            var colspan =this.monthOrQuarter==2?'colspan="2"':''
+            html += '<th class="month" '+colspan+' >' + dateHtml + '</th>';
             //next arrow
-            if ((!maxDate || maxDate.isAfter(calendar.lastDay)) && (!this.linkedCalendars || side == 'right' || this.singleDatePicker)) {
+            var number =this.monthOrQuarter==2?11:0;
+            if ( (Number(year) + number < this.maxYear) && (!this.linkedCalendars || side == 'right' || this.singleDatePicker)) {
                 html += '<th class="next available"><span></span></th>';
             } else {
                 html += '<th></th>';
             }
 
             html += '</tr>';
-            // html += '<tr>';
 
-            // add week number label
-            // if (this.showWeekNumbers || this.showISOWeekNumbers)
-            //     html += '<th class="week">' + this.locale.weekLabel + '</th>';
-
-            // $.each(this.locale.daysOfWeek, function(index, dayOfWeek) {
-            //     html += '<th>' + dayOfWeek + '</th>';
-            // });
-
-            // html += '</tr>';
             html += '</thead>';
             html += '<tbody>';
 
-            //adjust maxDate to reflect the maxSpan setting in order to
-            //grey out end dates beyond the maxSpan
-            // if (this.endDate == null && this.maxSpan) {
-                // var maxLimit = this.startDate.clone().add(this.maxSpan).endOf('day');
-                // if (!maxDate || maxLimit.isBefore(maxDate)) {
-                //     maxDate = maxLimit;
-                // }
-            // }
-            if(this.monthOrQuarter==1){//季度
+            if(this.monthOrQuarter==1){//quarter
                 var quarterIndex =0;
                 for (var row = 0; row < 4; row++) {
                     html += '<tr>';
@@ -736,7 +769,48 @@
                     }
                     html += '</tr>';
                 }
-            }else{
+            }else if(this.monthOrQuarter==2){//year
+                var yearIndex =0;
+                for (var row = 0; row < 3; row++) {
+                    html += '<tr>';
+                    for (var col = 0; col < 4; col++) {
+                        var classes = [];
+                        //highlight the currently selected start date
+                        if (calendar[row][col].format('YYYY') == this.startDate.format('YYYY'))
+                            classes.push('active', 'start-date');
+
+                        //highlight the currently selected end date
+                        if (this.endDate != null && calendar[row][col].format('YYYY') == this.endDate.format('YYYY'))
+                            classes.push('active', 'end-date');
+
+                        //highlight dates in-between the selected dates
+                        if (this.endDate != null && calendar[row][col] > this.startDate && calendar[row][col] < this.endDate)
+                            classes.push('in-range');
+
+                        //apply custom classes for this date
+                        var isCustom = this.isCustomDate(calendar[row][col]);
+                        if (isCustom !== false) {
+                            if (typeof isCustom === 'string')
+                                classes.push(isCustom);
+                            else
+                                Array.prototype.push.apply(classes, isCustom);
+                        }
+
+                        var cname = '', disabled = false;
+                        for (var i = 0; i < classes.length; i++) {
+                            cname += classes[i] + ' ';
+                            if (classes[i] == 'disabled yearPanel')
+                                disabled = true;
+                        }
+                        if (!disabled)
+                            cname += 'available yearPanel';
+
+                        html += '<td class="' + cname.replace(/^\s+|\s+$/g, '') + '" data-title="' + 'r' + row + 'c' + col + '">' + moment(year).add(yearIndex,'year').format('YYYY') + '</td>';
+                        yearIndex++;
+                    }
+                    html += '</tr>';
+                }
+            }else{//month
                 var monthIndex =0;
                 for (var row = 0; row < 4; row++) {
                     html += '<tr>';
@@ -958,25 +1032,26 @@
 
         clickPrev: function(e) {
             var cal = $(e.target).parents('.drp-calendar');
-            if (cal.hasClass('left')) {
-                this.leftCalendar.month.subtract(1, 'year');
+            var number =this.monthOrQuarter==2?12:1;
+            if (cal.hasClass('left')) {   
+                this.leftCalendar.month.subtract(number, 'year');
                 if (this.linkedCalendars)
-                    this.rightCalendar.month.subtract(1, 'year');
+                    this.rightCalendar.month.subtract(number, 'year');
             } else {
-                this.rightCalendar.month.subtract(1, 'year');
+                this.rightCalendar.month.subtract(number, 'year');
             }    
             this.updateCalendars();  
         },
 
         clickNext: function(e) {
-
+            var number =this.monthOrQuarter==2?12:1;
             var cal = $(e.target).parents('.drp-calendar');
             if (cal.hasClass('left')) {
-                this.leftCalendar.month.add(1, 'year');
+                this.leftCalendar.month.add(number, 'year');
             } else {
-                this.rightCalendar.month.add(1, 'year');
+                this.rightCalendar.month.add(number, 'year');
                 if (this.linkedCalendars)
-                    this.leftCalendar.month.add(1, 'year');
+                    this.leftCalendar.month.add(number, 'year');
             }
             this.updateCalendars();
            
@@ -1027,7 +1102,7 @@
             var col = title.substr(3, 1);
             var cal = $(e.target).parents('.drp-calendar');
             var date = cal.hasClass('left') ? this.leftCalendar.calendar[row][col] : this.rightCalendar.calendar[row][col];
-            
+
             //edit by luyan
             if (this.endDate || date.isBefore(this.startDate, 'day')) { //picking start
                 this.endDate = null;

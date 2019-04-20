@@ -1,9 +1,9 @@
-# Month & Quater Range Picker for Bootstrap
+# Month & Quater & Year Range Picker for Bootstrap
 
 Edit from [bootstrap-daterangepicker](https://github.com/dangrossman/bootstrap-daterangepicker);
 
 Add one parameter :  
-* **monthOrQuarter**:[number]0 for monthRangePicker(default) ,1 for quarterRangePicker  
+* **monthOrQuarter**:[number]0 for monthRangePicker(default) ,1 for quarterRangePicker , 2 for yearRangePicker 
 
 Delete showWeekNumbers,date and time picker, if you want to use daterangepicker, you can see the package [bootstrap-daterangepicker](https://www.npmjs.com/package/bootstrap-daterangepicker);
 
@@ -11,6 +11,11 @@ If your project is React , you can see the package [react-bootstrap-monthrangepi
 
 
 ## Screenshots
+
+```javascript
+  monthOrQuarter:2
+```
+![image](https://raw.githubusercontent.com/gntyu/react-bootstrap-monthrangepicker/master/year.gif)
 
 ```javascript
   monthOrQuarter:1
