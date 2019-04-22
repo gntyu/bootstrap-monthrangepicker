@@ -329,9 +329,9 @@
   height: 32px;
 }
 .daterangepicker .calendar-table td.yearPanel {
-  min-width: 60px;
-  width: 60px;
-  height: 40px;
+  min-width: 42px;
+  width: 42px;
+  height: 42px;
 }
 
 .daterangepicker select.yearselect.monthPanel {

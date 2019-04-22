@@ -547,16 +547,10 @@
         updateMonthsInView: function() {
             if(this.monthOrQuarter==2){
                 var start = this.startDate.format('YYYY');
-                var start_range=this.startDate._i||start;
-                if(!this.startDate._i){
-                    start_range=this.getYearRange(this.startDate,moment())
-                }
+                var start_range=this.getYearRange(this.startDate,moment())
                 if (this.endDate) {
                     var end = this.endDate.format('YYYY');
-                    var end_range=this.endDate._i||end;
-                    if(!this.endDate._i){
-                        end_range=this.getYearRange(this.endDate,moment().add(12,'year'))
-                    }
+                    var end_range=this.getYearRange(this.endDate,moment().add(12,'year'));
                     this.leftCalendar.month = moment(start_range);
                     if (!this.linkedCalendars && (start_range!= end_range)) {
                         this.rightCalendar.month =  moment(end_range);
