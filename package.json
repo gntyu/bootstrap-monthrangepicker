@@ -37,7 +37,7 @@
   "deprecated": false,
   "description": "Month & Quater range picker component for Bootstrap",
   "devDependencies": {
-    "node-sass": "^3.4.2"
+    "node-sass": "^4.14.1"
   },
   "homepage": "https://github.com/gntyu/bootstrap-monthrangepicker",
   "license": "MIT",
