@@ -615,7 +615,7 @@
             if(this.monthOrQuarter==1){//季度
                 for (var i = 0; i < 4; i++) {
                     var arr =[];
-                    arr.push(moment(year+'/'+(i*3+1)))
+                    arr.push(moment(year+'/'+(i*3+1),"YYYY/MM"))
                     calendar[i] = arr;
                 }
             }else if(this.monthOrQuarter==2){//年
@@ -633,7 +633,7 @@
                 for (var i = 0; i < 4; i++) {
                     var arr =[];
                     for (var j = 0; j < 3; j++){
-                        arr.push(moment(year+'/'+(i*3+j+1)))
+                        arr.push(moment(year+'/'+(i*3+j+1),"YYYY/MM"))
                     }
                     calendar[i] = arr;
                 }
